@@ -1,9 +1,11 @@
+import { RAWG_API_URL, RAWG_API_KEY } from '../config';
 import axios, { CanceledError } from 'axios';
 
+
 export default axios.create({
-    baseURL: 'https://api.rawg.io/api',
+    baseURL: RAWG_API_URL,
     params: {
-        key: '367eb96de67846e3b042e59523592ebc'
+        key: RAWG_API_KEY
     }
 });
 
