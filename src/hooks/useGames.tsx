@@ -11,7 +11,10 @@ const useGames = () => {
         setLoading(true);
       const { request, cancel } = gameService.getAll<FetchGamesResponse>();
       request.then(res => setGames(res.data.results))
-      .catch(err => setError(err.message))
+      .catch(err => {
+          if (err instanceof CanceledError ) return;
+          setError(err.message)
+          })
       .finally(() => setLoading(false));
       return () => cancel;
       }, []);
