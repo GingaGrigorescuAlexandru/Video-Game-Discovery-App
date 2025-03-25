@@ -1,8 +1,13 @@
 import useParentPlatforms from '../hooks/useParentPlatforms';
+import { ParentPlatform } from '../services/parent-platform-service.ts';
 import { BsChevronDown } from 'react-icons/bs';
 import { Menu, MenuButton, Button, MenuList, MenuItem } from "@chakra-ui/react";
 
-const PlatformSelector = () => {
+interface Props {
+    onSelectPlatform: (platform: parentPlatform) => void;
+    }
+
+const PlatformSelector = ({ onSelectPlatform }: Props) => {
     const { data: parentPlatforms, loading, error } = useParentPlatforms();
 
     if (error) return null;
@@ -12,7 +17,10 @@ const PlatformSelector = () => {
             <MenuButton as={Button} rightIcon={<BsChevronDown />}>Platform</MenuButton>
             <MenuList>
                 { parentPlatforms && parentPlatforms.map(platform =>
-                    <MenuItem key={platform.id}>{platform.name}</MenuItem>)}
+                    <MenuItem key={platform.id}
+                              onClick={() => onSelectPlatform(platform)}
+                              >{platform.name}
+                    </MenuItem>)}
             </MenuList>
         </Menu>
         )
