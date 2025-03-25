@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import Navbar from './components/Navbar';
 import GameGrid from './components/GameGrid';
-import FilterSection from './components/FilterSection';
+import GenreList from './components/GenreList';
 import { Grid, GridItem, Show } from '@chakra-ui/react';
 
 
@@ -13,10 +13,14 @@ function App() {
        <Grid templateAreas={{
         base: `"nav" "main"`,
         lg: `"nav nav" "aside main"`
-       }}>
+       }} templateColumns={{
+        base: '1fr',
+        lg: '200px 1fr'
+       }}
+       >
         <GridItem area='nav'><Navbar /></GridItem>
         <Show above="lg">
-            <GridItem area='aside'><FilterSection /></GridItem>
+            <GridItem area='aside' padding={3}><GenreList /></GridItem>
         </Show>
         <GridItem area='main'><GameGrid /></GridItem>
        </Grid>

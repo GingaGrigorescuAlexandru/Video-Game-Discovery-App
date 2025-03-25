@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { CanceledError } from '../services/api-client';
 import HttpService from '../services/http-service';
 
-interface FetchDataResponse<T> {
+interface FetchResponse<T> {
     count: number,
     results: T[];
     }
@@ -14,7 +14,7 @@ const useData = <T>(service: HttpService) => {
 
     useEffect(() => {
       setLoading(true);
-      const { request, cancel } = service.getAll<FetchDataResponse>();
+      const { request, cancel } = service.getAll<FetchResponse>();
       request.then(res => setData(res.data.results))
       .catch(err => {
           if (err instanceof CanceledError ) return;
