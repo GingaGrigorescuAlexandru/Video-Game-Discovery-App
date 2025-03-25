@@ -7,7 +7,7 @@ interface FetchResponse<T> {
     results: T[];
     }
 
-const useData = <T>(service: HttpService) => {
+const useData = <T>(service: HttpService, requestConfig?: AxiosRequestConfig) => {
     const [ data, setData ] = useState<T[]>([]);
     const [ error, setError ] = useState('');
     const [ loading, setLoading ] = useState(false);
