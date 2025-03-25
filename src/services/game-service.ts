@@ -15,9 +15,4 @@ export interface Game {
     parent_platforms: { platform: Platform}[]
     }
 
-export interface FetchGamesResponse {
-    count: number,
-    results: Game[];
-    }
-
 export default create('/games');
