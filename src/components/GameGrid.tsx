@@ -6,7 +6,7 @@ import { Text, SimpleGrid } from '@chakra-ui/react';
 
 const GameGrid = () => {
     const { data: games, error, loading, setGames, setError } = useGames();
-    const skeletons = [1, 2, 3, 4, 5, 6];
+    const skeletons = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
 
     return (
         <>
