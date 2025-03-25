@@ -9,14 +9,20 @@ interface FetchResponse<T> {
     results: T[];
     }
 
-const useData = <T>(service: HttpService, selectedPlatform?: ParentPlatform, deps?: any[] ) => {
+const useData = <T>(service: HttpService,
+                    selectedGenre?: Genre,
+                    selectedPlatform?: ParentPlatform,
+                    deps?: any[] ) => {
     const [ data, setData ] = useState<T[]>([]);
     const [ error, setError ] = useState('');
     const [ loading, setLoading ] = useState(false);
 
     useEffect(() => {
       setLoading(true);
-      const { request, cancel } = service.getAll<FetchResponse>({params: { parent_platforms: selectedPlatform?.id}});
+      const { request, cancel } = service.getAll<FetchResponse>({params:
+                                                        { parent_platforms: selectedPlatform?.id,
+                                                          genres: selectedGenre?.id
+                                                        }});
       request.then(res => setData(res.data.results))
       .catch(err => {
           if (err instanceof CanceledError ) return;

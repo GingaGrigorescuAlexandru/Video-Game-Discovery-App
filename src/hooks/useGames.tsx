@@ -4,9 +4,11 @@ import { Genre } from '../services/genre-service.ts';
 import { ParentPlatform } from '../services/parent-platform-service.ts';
 
 
-const useGames = (selectedPlatform: ParentPlatform | null ) =>
-                    useData<Game>(gameService,
-                                  selectedPlatform,
-                                  [selectedPlatform?.id])
+const useGames = (selectedGenre: Genre | null,
+                  selectedPlatform: ParentPlatform | null ) =>
+                  useData<Game>(gameService,
+                                selectedGenre,
+                                selectedPlatform,
+                                [selectedGenre?.id, selectedPlatform?.id])
 
 export default useGames;

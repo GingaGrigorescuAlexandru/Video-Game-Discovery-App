@@ -12,7 +12,7 @@ interface Props {
     }
 
 const GameGrid = ({ selectedGenre, selectedPlatform }: Props) => {
-    const { data: games, error, loading } = useGames(selectedPlatform);
+    const { data: games, error, loading } = useGames(selectedGenre, selectedPlatform);
     const skeletons = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
 
     return (
@@ -25,11 +25,10 @@ const GameGrid = ({ selectedGenre, selectedPlatform }: Props) => {
                     <GameCardSkeleton />
                 </GameCardContainer>)}
             { games && games.map(game =>
-                !selectedGenre || game.genres.some(genre => genre.id === selectedGenre.id) ? (
                 <GameCardContainer key={game.id}>
                     <GameCard game={game}>{game.name}</GameCard>
-                </GameCardContainer> ) : null
-                )}
+                </GameCardContainer> )
+                }
         </SimpleGrid>
         { error && <Text>{error}</Text>}
         </>
