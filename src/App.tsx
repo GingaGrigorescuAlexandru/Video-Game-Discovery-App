@@ -11,6 +11,7 @@ import { Grid, GridItem, Show, VStack, HStack } from '@chakra-ui/react';
 export interface GameQuery {
     genre: Genre | null;
     platform: ParentPlatform | null;
+    sortOrder: string | null;
     }
 
 function App() {
@@ -35,9 +36,10 @@ function App() {
                 <HStack spacing={5} paddingLeft={10}>
                     <PlatformSelector onSelectPlatform={(platform) => setGameQuery({...gameQuery, platform})}
                                       selectedPlatform={ gameQuery.platform } />
-                    <SortSelector />
+                    <SortSelector onSelectSortOrder={(sortOrder) => setGameQuery({...gameQuery, sortOrder})}
+                                  selectedOrder={ gameQuery.sortOrder }/>
                 </HStack>
-                <GameGrid gameQuery={gameQuery}/>
+                <GameGrid gameQuery={ gameQuery }/>
             </VStack>
         </GridItem>
        </Grid>

@@ -15,6 +15,7 @@ export interface Game {
     metacritic: number;
     background_image: string;
     parent_platforms: { platform: Platform}[]
+    ordering: string;
     }
 
 export default create('/games');

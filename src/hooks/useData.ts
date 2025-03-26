@@ -10,7 +10,7 @@ interface FetchResponse<T> {
     }
 
 const useData = <T>(service: HttpService,
-                    {genre, platform}: gameQuery | null = {},
+                    {genre, platform, sortOrder}: gameQuery | null = {},
                     deps?: any[] ) => {
     const [ data, setData ] = useState<T[]>([]);
     const [ error, setError ] = useState('');
@@ -20,7 +20,8 @@ const useData = <T>(service: HttpService,
       setLoading(true);
       const { request, cancel } = service.getAll<FetchResponse>({params:
                                                         { parent_platforms: platform?.id,
-                                                          genres: genre?.id
+                                                          genres: genre?.id,
+                                                          ordering: sortOrder
                                                         }});
       request.then(res => setData(res.data.results))
       .catch(err => {
