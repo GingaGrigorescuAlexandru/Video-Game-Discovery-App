@@ -7,10 +7,13 @@ import { Genre } from './services/genre-service.ts';
 import { ParentPlatform } from '../services/parent-platform-service.ts';
 import { Grid, GridItem, Show, VStack } from '@chakra-ui/react';
 
-function App() {
-  const [ selectedGenre, setSelectedGenre ] = useState<Genre | null>(null);
-  const [ selectedPlatform, setSelectedPlatform ] = useState<ParentPlatform | null>(null);
+export interface GameQuery {
+    genre: Genre | null;
+    platform: ParentPlatform | null;
+    }
 
+function App() {
+  const [ gameQuery, setGameQuery ] = useState<GameQuery>({} as GameQuery)
   return (
     <>
        <Grid templateAreas={{
@@ -23,14 +26,14 @@ function App() {
        >
         <GridItem area='nav'><Navbar /></GridItem>
         <Show above="lg">
-            <GridItem area='aside' padding={3}><GenreList onSelectGenre={(genre) => setSelectedGenre(genre)}
-                                                          selectedGenre={ selectedGenre } /></GridItem>
+            <GridItem area='aside' padding={3}><GenreList onSelectGenre={(genre) => setGameQuery({...gameQuery, genre})}
+                                                          selectedGenre={ gameQuery.genre } /></GridItem>
         </Show>
         <GridItem area='main'>
             <VStack align='start'>
-                <PlatformSelector onSelectPlatform={(platform) => setSelectedPlatform(platform)} />
-                <GameGrid selectedGenre={ selectedGenre }
-                          selectedPlatform={ selectedPlatform }/>
+                <PlatformSelector onSelectPlatform={(platform) => setGameQuery({...gameQuery, platform})}
+                                  selectedPlatform={ gameQuery.platform } />
+                <GameGrid gameQuery={gameQuery}/>
             </VStack>
         </GridItem>
        </Grid>

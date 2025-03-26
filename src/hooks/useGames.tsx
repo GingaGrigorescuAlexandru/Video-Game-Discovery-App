@@ -1,14 +1,10 @@
 import useData from './useData';
 import gameService, { Game } from '../services/game-service.ts';
-import { Genre } from '../services/genre-service.ts';
-import { ParentPlatform } from '../services/parent-platform-service.ts';
+import { GameQuery } from '../App.tsx';
 
-
-const useGames = (selectedGenre: Genre | null,
-                  selectedPlatform: ParentPlatform | null ) =>
+const useGames = (gameQuery: GameQuery ) =>
                   useData<Game>(gameService,
-                                selectedGenre,
-                                selectedPlatform,
-                                [selectedGenre?.id, selectedPlatform?.id])
+                                gameQuery,
+                                [gameQuery])
 
 export default useGames;

@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
 import { CanceledError } from '../services/api-client';
 import HttpService from '../services/http-service';
-import { Genre } from '../services/genre-service.ts';
-import { ParentPlatform } from '../services/parent-platform-service.ts';
+import { GameQuery } from '../App.tsx';
+
 
 interface FetchResponse<T> {
     count: number,
@@ -10,8 +10,7 @@ interface FetchResponse<T> {
     }
 
 const useData = <T>(service: HttpService,
-                    selectedGenre?: Genre,
-                    selectedPlatform?: ParentPlatform,
+                    {genre, platform}: gameQuery | null = {},
                     deps?: any[] ) => {
     const [ data, setData ] = useState<T[]>([]);
     const [ error, setError ] = useState('');
@@ -20,8 +19,8 @@ const useData = <T>(service: HttpService,
     useEffect(() => {
       setLoading(true);
       const { request, cancel } = service.getAll<FetchResponse>({params:
-                                                        { parent_platforms: selectedPlatform?.id,
-                                                          genres: selectedGenre?.id
+                                                        { parent_platforms: platform?.id,
+                                                          genres: genre?.id
                                                         }});
       request.then(res => setData(res.data.results))
       .catch(err => {
