@@ -19,7 +19,7 @@ const GenreList = ({ onSelectGenre, selectedGenre }: Props) => {
 
     return (
         <>
-            <Heading paddingY={5} >Genres</Heading>
+            <Heading fontSize='2xl' marginBottom={3} >Genres</Heading>
             <List align='start' spacing={8}>
             { loading && skeletons.map(skeleton => <GenreListSkeleton key={skeleton}/> )}
             { genres && genres.map(genre =>
@@ -27,8 +27,11 @@ const GenreList = ({ onSelectGenre, selectedGenre }: Props) => {
                     <HStack>
                         <Image src={getCroppedImageUrl(genre.image_background)}
                                 borderRadius='8px'
-                                boxSize="32px"/>
+                                boxSize="32px"
+                                objectFit='cover'/>
                         <Button fontWeight={ genre.id === selectedGenre?.id ? 'bold' : 'normal'}
+                                whiteSpace='normal'
+                                textAlign='left'
                                 onClick={() => onSelectGenre(genre)}
                                 fontSize='lg' variant='link' >{genre.name}</Button>
                     </HStack>
