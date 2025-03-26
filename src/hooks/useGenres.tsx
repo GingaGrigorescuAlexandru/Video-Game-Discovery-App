@@ -1,6 +1,5 @@
-import useData from './useData';
-import genreService, { Genre } from '../services/genre-service.ts';
+import genres from '../data/genres';
 
-const useGenres = () => useData<Genre>(genreService)
+const useGenres = () => ({ data: genres, isLoading: false, error: null });
 
 export default useGenres;
