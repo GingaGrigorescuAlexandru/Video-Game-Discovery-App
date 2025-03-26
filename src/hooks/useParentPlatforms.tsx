@@ -1,6 +1,5 @@
-import useData from './useData';
-import parentPlatformService, { ParentPlatform } from '../services/parent-platform-service.ts';
+import platforms from '../data/platforms';
 
-const useParentPlatforms = () => useData<ParentPlatform>(parentPlatformService)
+const useParentPlatforms = () => ({ data: platforms, loading: false, error: null})
 
 export default useParentPlatforms;
