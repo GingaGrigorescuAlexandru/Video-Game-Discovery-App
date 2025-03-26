@@ -19,7 +19,7 @@ const GenreList = ({ onSelectGenre, selectedGenre }: Props) => {
 
     return (
         <>
-            <Heading>Genres</Heading>
+            <Heading paddingY={5} >Genres</Heading>
             <List align='start' spacing={8}>
             { loading && skeletons.map(skeleton => <GenreListSkeleton key={skeleton}/> )}
             { genres && genres.map(genre =>
